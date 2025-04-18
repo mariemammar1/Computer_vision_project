@@ -1,82 +1,51 @@
-🎯 Objectif global
-Créer un système intelligent de reconnaissance faciale enrichie en temps réel (âge, genre, émotion, regard) pour des applications de sécurité, contrôle d'accès ou surveillance.
+### Objectif global  
+Développer un système intelligent de reconnaissance faciale enrichie en temps réel, intégrant l’analyse de l’âge, du genre, de l’émotion et de la direction du regard. Ce système est destiné à des applications telles que la sécurité, le contrôle d’accès ou la surveillance.
 
-🧠 Modules principaux :
-1. 🔍 Reconnaissance faciale avec métadonnées
-📷 Détection de visages avec OpenCV
+---
 
+### Modules principaux
 
-🧠 Encodage facial avec face_recognition
+#### 1. Reconnaissance faciale avec métadonnées  
+- Détection des visages via OpenCV  
+- Encodage des visages avec `face_recognition`  
+- Récupération des métadonnées (nom, âge, genre) depuis un fichier Excel  
+- Affichage des informations si une correspondance est trouvée, sinon refus d’accès  
+- Bibliothèques : `face_recognition`, `OpenCV`, `pandas`, `os`
 
+#### 2. Détection de l’âge (via CNN)  
+- Images classées par tranches d’âge : 6–20, 25–30, 42–48, 60–98  
+- Modèle CNN entraîné sur des images 48x48 en niveaux de gris  
+- Prédiction de la tranche d’âge en direct via webcam  
+- Bibliothèques : `OpenCV`, `Keras`, `NumPy`, `scikit-learn`
 
-📊 Métadonnées (nom, âge, genre) récupérées depuis un fichier Excel
+#### 3. Détection d’émotions (via CNN)  
+- Sept émotions détectées : angry, disgust, fear, happy, sad, surprise, neutral  
+- Images organisées par classe émotionnelle  
+- Modèle CNN entraîné et utilisé en temps réel sur visage détecté  
+- Bibliothèques : `OpenCV`, `Keras`, `NumPy`, `scikit-learn`
 
+#### 4. Détection de la direction du regard (eye-tracking)  
+- Images classées en deux catégories : `left_look` (0) et `right_look` (1)  
+- Modèle CNN entraîné sur des images 48x48 en niveaux de gris  
+- En temps réel, détection du regard vers la droite interprétée comme comportement suspect  
+- Bibliothèques : `OpenCV`, `Keras`, `NumPy`, `scikit-learn`
 
-✅ Affichage des infos si correspondance trouvée, ❌ sinon refus d’accès
+---
 
+### Fonctionnement en temps réel  
+- Activation de la webcam avec OpenCV  
+- À chaque frame : détection, prétraitement, prédiction  
+- Affichage dynamique des rectangles autour des visages, des informations ou alertes  
+- Arrêt du système avec la touche `q`
 
-📚 Libs : face_recognition, OpenCV, pandas, os
+---
 
-2. 📅 Détection d’âge (via CNN)
-📂 Images triées par tranche d’âge (6–20, 25–30, 42–48, 60–98)
+### Fichiers des modèles entraînés
 
+| Tâche                  | Fichier modèle                |
+|------------------------|-------------------------------|
+| Détection d’âge        | `age_detection_model.h5`      |
+| Détection d’émotion    | `emotion_detection_model.h5`  |
+| Détection du regard    | `eye_tracking_model.h5`       |
 
-🏗️ Modèle CNN entraîné sur images 48x48 (niveaux de gris)
-
-
-🧪 Prédiction de tranche d’âge en live via webcam
-
-
-📦 Libs : OpenCV, Keras, NumPy, scikit-learn
-
-3. 🙂 Détection d’émotions (via CNN)
-7 émotions : angry, disgust, fear, happy, sad, surprise, neutral
-
-
-📁 Images organisées par émotion
-
-
-🧠 Modèle CNN entraîné, puis utilisé en temps réel sur visage détecté
-
-
-📦 Libs : OpenCV, Keras, NumPy, scikit-learn
-
-4. 👁️ Détection de la direction du regard (eye-tracking)
-📂 Images d’yeux classées en left_look (0) et right_look (1)
-
-
-🧠 Modèle CNN entraîné (48x48, grayscale)
-
-
-📹 En temps réel : si regard détecté à droite → comportement suspect
-
-
-🔒 Utilisation possible en sécurité/surveillance
-
-
-📦 Libs : OpenCV, Keras, NumPy, scikit-learn
-
-🎥 Fonctionnement en temps réel (pour tous les modules)
-📸 Webcam activée avec OpenCV
-
-
-🧠 Pour chaque frame : détection → prétraitement → prédiction
-
-
-🖼️ Affichage dynamique : rectangles, texte d’info ou alerte
-
-
-🛑 Arrêt avec touche q
-
-
-
-💾 Modèles enregistrés :
-Tâche
-Fichier modèle
-Âge
-age_detection_model.h5
-Émotion
-emotion_detection_model.h5
-Direction du regard
-eye_tracking_model.h5
-
+---
